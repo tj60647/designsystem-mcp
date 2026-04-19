@@ -1,0 +1,240 @@
+{
+  "check": {
+    "name": "Check",
+    "category": "action",
+    "keywords": ["success", "done", "complete", "confirm", "tick"],
+    "sizes": [16, 20, 24],
+    "description": "Checkmark for confirming selection or successful completion"
+  },
+  "close": {
+    "name": "Close",
+    "category": "action",
+    "keywords": ["dismiss", "remove", "cancel", "x", "clear"],
+    "sizes": [16, 20, 24],
+    "description": "Close or dismiss a surface, dialog, or tag"
+  },
+  "plus": {
+    "name": "Plus",
+    "category": "action",
+    "keywords": ["add", "create", "new", "insert"],
+    "sizes": [16, 20, 24],
+    "description": "Add a new item or expand a section"
+  },
+  "minus": {
+    "name": "Minus",
+    "category": "action",
+    "keywords": ["remove", "subtract", "decrease", "collapse"],
+    "sizes": [16, 20, 24],
+    "description": "Remove an item or collapse a section"
+  },
+  "trash": {
+    "name": "Trash",
+    "category": "action",
+    "keywords": ["delete", "remove", "bin", "discard", "destroy"],
+    "sizes": [16, 20, 24],
+    "description": "Permanently delete an item or clear a selection"
+  },
+  "edit": {
+    "name": "Edit",
+    "category": "action",
+    "keywords": ["pen", "pencil", "modify", "change", "update"],
+    "sizes": [16, 20, 24],
+    "description": "Edit or modify existing content"
+  },
+  "search": {
+    "name": "Search",
+    "category": "action",
+    "keywords": ["find", "magnifier", "magnifying glass", "query", "look"],
+    "sizes": [16, 20, 24],
+    "description": "Open a search interface or indicate a search input"
+  },
+  "filter": {
+    "name": "Filter",
+    "category": "action",
+    "keywords": ["funnel", "refine", "narrow", "sort"],
+    "sizes": [16, 20, 24],
+    "description": "Apply or indicate active filters on a data set"
+  },
+  "arrow-up": {
+    "name": "Arrow Up",
+    "category": "navigation",
+    "keywords": ["up", "ascending", "increase", "previous", "collapse"],
+    "sizes": [16, 20, 24],
+    "description": "Navigate upward or indicate ascending sort order"
+  },
+  "arrow-down": {
+    "name": "Arrow Down",
+    "category": "navigation",
+    "keywords": ["down", "descending", "decrease", "next", "expand"],
+    "sizes": [16, 20, 24],
+    "description": "Navigate downward or indicate descending sort order"
+  },
+  "arrow-left": {
+    "name": "Arrow Left",
+    "category": "navigation",
+    "keywords": ["back", "previous", "return", "left"],
+    "sizes": [16, 20, 24],
+    "description": "Navigate back or to the previous item"
+  },
+  "arrow-right": {
+    "name": "Arrow Right",
+    "category": "navigation",
+    "keywords": ["forward", "next", "continue", "right"],
+    "sizes": [16, 20, 24],
+    "description": "Navigate forward or to the next item"
+  },
+  "chevron-down": {
+    "name": "Chevron Down",
+    "category": "navigation",
+    "keywords": ["expand", "dropdown", "open", "more", "caret"],
+    "sizes": [16, 20, 24],
+    "description": "Indicate an expandable section or open dropdown"
+  },
+  "menu": {
+    "name": "Menu",
+    "category": "navigation",
+    "keywords": ["hamburger", "navigation", "sidebar", "open", "toggle"],
+    "sizes": [20, 24],
+    "description": "Open the navigation menu or sidebar"
+  },
+  "home": {
+    "name": "Home",
+    "category": "navigation",
+    "keywords": ["start", "root", "dashboard", "main"],
+    "sizes": [20, 24],
+    "description": "Navigate to the home or root page"
+  },
+  "info": {
+    "name": "Info",
+    "category": "status",
+    "keywords": ["information", "help", "detail", "about"],
+    "sizes": [16, 20, 24],
+    "description": "Indicate informational content or an information tooltip"
+  },
+  "warning": {
+    "name": "Warning",
+    "category": "status",
+    "keywords": ["alert", "caution", "danger", "triangle", "attention"],
+    "sizes": [16, 20, 24],
+    "description": "Indicate a warning or potentially destructive condition"
+  },
+  "error-circle": {
+    "name": "Error Circle",
+    "category": "status",
+    "keywords": ["error", "fail", "invalid", "wrong", "problem"],
+    "sizes": [16, 20, 24],
+    "description": "Indicate an error or failed state"
+  },
+  "check-circle": {
+    "name": "Check Circle",
+    "category": "status",
+    "keywords": ["success", "valid", "complete", "passed", "ok"],
+    "sizes": [16, 20, 24],
+    "description": "Indicate a successful or valid state"
+  },
+  "spinner": {
+    "name": "Spinner",
+    "category": "status",
+    "keywords": ["loading", "busy", "progress", "wait", "pending"],
+    "sizes": [16, 20, 24],
+    "description": "Indicate a loading or in-progress state"
+  },
+  "copy": {
+    "name": "Copy",
+    "category": "content",
+    "keywords": ["clipboard", "duplicate", "paste", "clone"],
+    "sizes": [16, 20, 24],
+    "description": "Copy content to the clipboard"
+  },
+  "external-link": {
+    "name": "External Link",
+    "category": "content",
+    "keywords": ["link", "open", "new tab", "out", "navigate"],
+    "sizes": [16, 20, 24],
+    "description": "Indicate a link that opens in a new tab or external site"
+  },
+  "download": {
+    "name": "Download",
+    "category": "content",
+    "keywords": ["save", "export", "file", "get"],
+    "sizes": [20, 24],
+    "description": "Download a file or export data"
+  },
+  "upload": {
+    "name": "Upload",
+    "category": "content",
+    "keywords": ["import", "file", "send", "attach"],
+    "sizes": [20, 24],
+    "description": "Upload a file or import data"
+  },
+  "play": {
+    "name": "Play",
+    "category": "media",
+    "keywords": ["start", "video", "audio", "resume", "begin"],
+    "sizes": [16, 20, 24],
+    "description": "Start or resume media playback"
+  },
+  "pause": {
+    "name": "Pause",
+    "category": "media",
+    "keywords": ["stop", "hold", "video", "audio", "suspend"],
+    "sizes": [16, 20, 24],
+    "description": "Pause media playback"
+  },
+  "volume": {
+    "name": "Volume",
+    "category": "media",
+    "keywords": ["sound", "audio", "speaker", "mute"],
+    "sizes": [20, 24],
+    "description": "Control or indicate audio volume"
+  },
+  "checkbox-checked": {
+    "name": "Checkbox Checked",
+    "category": "form",
+    "keywords": ["checked", "selected", "tick", "agree"],
+    "sizes": [16, 20],
+    "description": "Visual indicator for a checked checkbox state"
+  },
+  "radio-selected": {
+    "name": "Radio Selected",
+    "category": "form",
+    "keywords": ["radio", "selected", "chosen", "option"],
+    "sizes": [16, 20],
+    "description": "Visual indicator for a selected radio button"
+  },
+  "eye": {
+    "name": "Eye",
+    "category": "form",
+    "keywords": ["show", "visible", "password", "reveal", "view"],
+    "sizes": [16, 20, 24],
+    "description": "Toggle visibility of sensitive content such as passwords"
+  },
+  "eye-off": {
+    "name": "Eye Off",
+    "category": "form",
+    "keywords": ["hide", "hidden", "password", "obscure", "conceal"],
+    "sizes": [16, 20, 24],
+    "description": "Indicate that sensitive content is currently hidden"
+  },
+  "mail": {
+    "name": "Mail",
+    "category": "communication",
+    "keywords": ["email", "envelope", "message", "contact", "inbox"],
+    "sizes": [20, 24],
+    "description": "Represent email or a mail-related action"
+  },
+  "bell": {
+    "name": "Bell",
+    "category": "communication",
+    "keywords": ["notification", "alert", "reminder", "ring"],
+    "sizes": [20, 24],
+    "description": "Represent notifications or a notification preference"
+  },
+  "chat": {
+    "name": "Chat",
+    "category": "communication",
+    "keywords": ["message", "comment", "bubble", "talk", "conversation"],
+    "sizes": [20, 24],
+    "description": "Open a chat or messaging interface"
+  }
+}

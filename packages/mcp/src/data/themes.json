@@ -1,0 +1,41 @@
+{
+  "light": {
+    "name": "Light",
+    "description": "Default light theme. Semantic tokens resolve to light-mode palette values.",
+    "semantic": {
+      "color.semantic.background.default": "{color.neutral.0}",
+      "color.semantic.background.subtle":  "{color.neutral.50}",
+      "color.semantic.background.muted":   "{color.neutral.100}",
+      "color.semantic.text.primary":       "{color.neutral.900}",
+      "color.semantic.text.secondary":     "{color.neutral.600}",
+      "color.semantic.text.disabled":      "{color.neutral.400}",
+      "color.semantic.text.inverse":       "{color.neutral.0}",
+      "color.semantic.border.default":     "{color.neutral.200}",
+      "color.semantic.border.strong":      "{color.neutral.300}",
+      "color.semantic.border.focus":       "{color.primary.600}",
+      "color.semantic.action.primary":     "{color.primary.600}",
+      "color.semantic.action.primaryHover":"{color.primary.700}",
+      "color.semantic.action.primaryText": "{color.neutral.0}"
+    }
+  },
+
+  "dark": {
+    "name": "Dark",
+    "description": "Dark mode theme. Neutrals are inverted so dark surfaces become backgrounds and light neutrals become foreground text.",
+    "semantic": {
+      "color.semantic.background.default": "{color.neutral.900}",
+      "color.semantic.background.subtle":  "{color.neutral.800}",
+      "color.semantic.background.muted":   "{color.neutral.700}",
+      "color.semantic.text.primary":       "{color.neutral.0}",
+      "color.semantic.text.secondary":     "{color.neutral.300}",
+      "color.semantic.text.disabled":      "{color.neutral.500}",
+      "color.semantic.text.inverse":       "{color.neutral.900}",
+      "color.semantic.border.default":     "{color.neutral.700}",
+      "color.semantic.border.strong":      "{color.neutral.600}",
+      "color.semantic.border.focus":       "{color.primary.400}",
+      "color.semantic.action.primary":     "{color.primary.500}",
+      "color.semantic.action.primaryHover":"{color.primary.400}",
+      "color.semantic.action.primaryText": "{color.neutral.0}"
+    }
+  }
+}

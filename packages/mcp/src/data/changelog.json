@@ -1,0 +1,69 @@
+[
+  {
+    "version": "0.3.0",
+    "date": "2024-03-01",
+    "summary": "Full MCP primitive coverage: Resources, Prompts, Sampling, Elicitation, Logging, and experimental Tasks.",
+    "added": [
+      "Resources — 14 resource URIs across tokens, components, themes, icons, guidelines, and lifecycle",
+      "Prompts — 9 MCP prompt primitives replacing the REST /prompt-templates endpoint",
+      "Sampling — 5 server-side sampling use cases for fuzzy validation and intent resolution",
+      "Elicitation — 6 interactive elicitation scenarios for ambiguity and destructive operations",
+      "Logging — 4 log levels, 14 structured log events via notifications/message",
+      "Tasks (experimental) — batch_validate and full_audit as long-running task-based tools"
+    ],
+    "changed": [],
+    "deprecated": [
+      "GET /prompt-templates — replaced by MCP Prompts primitive; endpoint retained for backward compatibility"
+    ],
+    "removed": []
+  },
+  {
+    "version": "0.2.0",
+    "date": "2024-01-15",
+    "summary": "Tool expansion: themes, icons, accessibility, component depth, layout, and versioning.",
+    "added": [
+      "list_themes — list all available themes",
+      "get_theme — get full theme definition with token overrides",
+      "list_icons — list all icons, optionally filtered by category or tag",
+      "get_icon — get a single icon by name with SVG metadata and usage guidance",
+      "search_icons — semantic search across the icon set",
+      "check_contrast — WCAG AA/AAA contrast ratio checker",
+      "get_accessibility_guidance — per-component ARIA, keyboard, and focus-order spec",
+      "get_component_variants — variants with when-to-use guidance",
+      "get_component_anatomy — internal slots, valid children, and composition patterns",
+      "get_component_relationships — parent, sibling, and related components",
+      "get_layout_guidance — page gutters, max-widths, breakpoints, region spacing",
+      "get_spacing_scale — structured spacing scale with semantic usage hints",
+      "get_changelog — version history filterable by version range",
+      "get_deprecations — current deprecations with migration paths and removal timelines"
+    ],
+    "changed": [
+      "validate_component_usage — now returns actionable fix suggestions alongside violations"
+    ],
+    "deprecated": [],
+    "removed": []
+  },
+  {
+    "version": "0.1.0",
+    "date": "2023-11-01",
+    "summary": "Initial release with 13 core tools for tokens, components, validation, and search.",
+    "added": [
+      "list_token_categories",
+      "get_tokens",
+      "get_token",
+      "list_components",
+      "get_component",
+      "get_component_tokens",
+      "validate_color",
+      "get_component_constraints",
+      "validate_component_usage",
+      "suggest_token",
+      "diff_against_system",
+      "search",
+      "get_schema"
+    ],
+    "changed": [],
+    "deprecated": [],
+    "removed": []
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "type": "component",
+    "name": "Overlay",
+    "deprecatedSince": "2.1.0",
+    "removalVersion": "3.0.0",
+    "reason": "The Overlay component was too generic and created ambiguous usage. It has been split into focused replacements.",
+    "migrationPath": "Use Dialog for modal overlays and Drawer for side-panel overlays. See the Modal and Navigation component specs.",
+    "replacements": ["modal", "navigation"]
+  },
+  {
+    "type": "token",
+    "name": "color.brand.primary",
+    "deprecatedSince": "0.2.0",
+    "removalVersion": "1.0.0",
+    "reason": "The brand.primary alias was ambiguous and conflated brand color with interaction color.",
+    "migrationPath": "Use color.primary.600 for interactive elements or color.semantic.action.primary for semantic usage.",
+    "replacements": ["color.primary.600", "color.semantic.action.primary"]
+  },
+  {
+    "type": "token",
+    "name": "spacing.xs",
+    "deprecatedSince": "0.2.0",
+    "removalVersion": "1.0.0",
+    "reason": "Named size aliases (xs, sm, md) were replaced with a numeric scale for consistency with the layout grid.",
+    "migrationPath": "Use spacing.2 (8px) in place of spacing.xs. See the spacing scale documentation.",
+    "replacements": ["spacing.2"]
+  },
+  {
+    "type": "token",
+    "name": "typography.body",
+    "deprecatedSince": "0.2.0",
+    "removalVersion": "1.0.0",
+    "reason": "Composite text style tokens are no longer shipped — use individual typography primitives instead.",
+    "migrationPath": "Compose typography.fontSize.base, typography.lineHeight.normal, and typography.fontWeight.regular individually.",
+    "replacements": ["typography.fontSize.base", "typography.lineHeight.normal", "typography.fontWeight.regular"]
+  },
+  {
+    "type": "endpoint",
+    "name": "GET /prompt-templates",
+    "deprecatedSince": "0.3.0",
+    "removalVersion": "1.0.0",
+    "reason": "Replaced by the MCP Prompts primitive, which makes templates discoverable by any MCP client natively.",
+    "migrationPath": "Use MCP prompts/list and prompts/get methods to enumerate and retrieve prompt templates.",
+    "replacements": ["MCP Prompts primitive"]
+  }
+]

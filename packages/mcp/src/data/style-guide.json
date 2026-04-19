@@ -1,0 +1,290 @@
+{
+  "principles": [
+    {
+      "name": "Clarity over cleverness",
+      "description": "Every design decision should make the interface easier to understand, not more visually interesting. If a choice requires explanation, it is probably wrong.",
+      "implication": "Prefer a plain, legible layout over an elaborate one. When in doubt, remove decoration."
+    },
+    {
+      "name": "Spatial consistency",
+      "description": "Spacing communicates hierarchy and relationship. Elements that belong together are closer together. Unrelated elements have more space between them. Spacing values always come from the spacing scale — never arbitrary px values.",
+      "implication": "Use spacing.2 (8px) for tightly related inline elements, spacing.4 (16px) between fields in a form, spacing.8 (32px) between card groups, spacing.16 (64px) between page sections."
+    },
+    {
+      "name": "Semantic color",
+      "description": "Color carries meaning before it carries aesthetics. The palette is structured so that semantic roles (action, destructive, success, warning) are immediately recognisable and consistent across contexts.",
+      "implication": "Use color.semantic tokens for UI chrome. Use color.primary tokens only for brand-level surfaces. Never use primitive color tokens (color.neutral.*, color.primary.*) directly on interactive elements."
+    },
+    {
+      "name": "Accessible by default",
+      "description": "Accessibility is a design constraint, not a post-launch checklist item. Every component spec includes accessibility requirements as first-class data. Meeting WCAG 2.1 AA is the minimum bar; the system is designed to exceed it wherever possible.",
+      "implication": "Check color contrast with check_contrast before any color pairing is used in production. All interactive components ship with required ARIA attributes already defined in their spec."
+    },
+    {
+      "name": "Tokens are the API",
+      "description": "Designers and engineers share a single vocabulary: token names. A token name is a promise about intent (color.semantic.error is always the error color regardless of theme or mode). Hard-coded values break this contract.",
+      "implication": "Reference tokens by path in all component code. When a value is not in the token set, add a token — do not hard-code the value."
+    },
+    {
+      "name": "Composability over completeness",
+      "description": "It is better to have fewer, well-composed primitives than an exhaustive library of single-purpose components. The design system provides building blocks; product teams compose them into patterns.",
+      "implication": "Before building a new component, check whether the need can be met by composing two or three existing ones according to the composition patterns guide."
+    }
+  ],
+  "colorUsage": {
+    "roles": {
+      "action": {
+        "token": "color.semantic.action",
+        "description": "Primary interactive actions — buttons, links, selected states. Conveys 'this is clickable and important'.",
+        "approvedPairings": [
+          { "foreground": "color.neutral.0", "background": "color.semantic.action", "contrastRatio": "7.2:1", "wcag": "AAA", "use": "Primary button label on primary button surface" },
+          { "foreground": "color.semantic.action", "background": "color.semantic.background", "contrastRatio": "5.4:1", "wcag": "AA", "use": "Text link on page background" }
+        ]
+      },
+      "surface": {
+        "token": "color.semantic.surface",
+        "description": "Card, panel, and container backgrounds — one level above the page background.",
+        "approvedPairings": [
+          { "foreground": "color.semantic.text", "background": "color.semantic.surface", "contrastRatio": "14.5:1", "wcag": "AAA", "use": "Body text on card surface" },
+          { "foreground": "color.semantic.textSubtle", "background": "color.semantic.surface", "contrastRatio": "6.2:1", "wcag": "AA", "use": "Supporting text on card surface" }
+        ]
+      },
+      "destructive": {
+        "token": "color.semantic.error",
+        "description": "Irreversible or dangerous actions — delete, revoke, permanently disable. Always pair with confirmation.",
+        "approvedPairings": [
+          { "foreground": "color.neutral.0", "background": "color.semantic.error", "contrastRatio": "5.8:1", "wcag": "AA", "use": "Destructive button label on error background" },
+          { "foreground": "color.semantic.error", "background": "color.semantic.background", "contrastRatio": "5.1:1", "wcag": "AA", "use": "Inline error message text" }
+        ]
+      },
+      "success": {
+        "token": "color.semantic.success",
+        "description": "Confirmations, completed states, positive feedback.",
+        "approvedPairings": [
+          { "foreground": "color.neutral.900", "background": "color.semantic.successSubtle", "contrastRatio": "8.3:1", "wcag": "AAA", "use": "Success banner text on tinted background" }
+        ]
+      },
+      "warning": {
+        "token": "color.semantic.warning",
+        "description": "Caution, non-blocking alerts, deprecation notices.",
+        "approvedPairings": [
+          { "foreground": "color.neutral.900", "background": "color.semantic.warningSubtle", "contrastRatio": "9.1:1", "wcag": "AAA", "use": "Warning banner text on tinted background" }
+        ]
+      },
+      "text": {
+        "token": "color.semantic.text",
+        "description": "Primary body text. Use for any text that must be readable at a glance.",
+        "approvedPairings": [
+          { "foreground": "color.semantic.text", "background": "color.semantic.background", "contrastRatio": "14.5:1", "wcag": "AAA", "use": "Body text on page background" },
+          { "foreground": "color.semantic.text", "background": "color.semantic.surface", "contrastRatio": "14.5:1", "wcag": "AAA", "use": "Body text on card surface" }
+        ]
+      },
+      "textSubtle": {
+        "token": "color.semantic.textSubtle",
+        "description": "Secondary text — captions, helper text, metadata. Never use for primary content.",
+        "approvedPairings": [
+          { "foreground": "color.semantic.textSubtle", "background": "color.semantic.background", "contrastRatio": "6.2:1", "wcag": "AA", "use": "Caption or helper text on page background" }
+        ]
+      },
+      "border": {
+        "token": "color.semantic.border",
+        "description": "Dividers, input outlines, card borders. Decorative separation, not informational color.",
+        "approvedPairings": [
+          { "foreground": "color.semantic.border", "background": "color.semantic.background", "contrastRatio": "3.2:1", "wcag": "UI", "use": "Input border on page background (UI component contrast, not text contrast)" }
+        ]
+      }
+    },
+    "notes": [
+      "Never use color.primary.* tokens directly on interactive elements — always map through a semantic role.",
+      "Dark mode is handled by theme overrides on the same semantic token names. Code that uses semantic tokens requires no changes to support dark mode.",
+      "The brand palette (color.primary.*) may change between design system versions; semantic tokens are stable identifiers.",
+      "Avoid combining two saturated colors (e.g. action + destructive) in the same visual cluster — one should always dominate."
+    ]
+  },
+  "typographyUsage": {
+    "hierarchy": [
+      {
+        "level": "display",
+        "token": "typography.fontSize.4xl",
+        "weight": "typography.fontWeight.bold",
+        "lineHeight": "typography.lineHeight.tight",
+        "use": "Hero headlines, marketing headlines. Rarely used in product UI.",
+        "constraints": ["Do not use in forms, tables, or navigation", "Maximum one display heading per view"]
+      },
+      {
+        "level": "h1",
+        "token": "typography.fontSize.3xl",
+        "weight": "typography.fontWeight.bold",
+        "lineHeight": "typography.lineHeight.tight",
+        "use": "Page title. One per page.",
+        "constraints": ["Do not nest h1 inside cards or panels — use h2 for section titles within a page"]
+      },
+      {
+        "level": "h2",
+        "token": "typography.fontSize.2xl",
+        "weight": "typography.fontWeight.semibold",
+        "lineHeight": "typography.lineHeight.snug",
+        "use": "Major section headings within a page.",
+        "constraints": ["Use as the primary heading inside a card or panel"]
+      },
+      {
+        "level": "h3",
+        "token": "typography.fontSize.xl",
+        "weight": "typography.fontWeight.semibold",
+        "lineHeight": "typography.lineHeight.snug",
+        "use": "Sub-section headings, card group titles.",
+        "constraints": ["Do not skip heading levels"]
+      },
+      {
+        "level": "h4",
+        "token": "typography.fontSize.lg",
+        "weight": "typography.fontWeight.medium",
+        "lineHeight": "typography.lineHeight.normal",
+        "use": "Label headings, form section titles, sidebar section titles.",
+        "constraints": []
+      },
+      {
+        "level": "body",
+        "token": "typography.fontSize.base",
+        "weight": "typography.fontWeight.regular",
+        "lineHeight": "typography.lineHeight.relaxed",
+        "use": "All body copy. Default text size for product UI.",
+        "constraints": ["Do not set body text smaller than typography.fontSize.sm in any reading context"]
+      },
+      {
+        "level": "small",
+        "token": "typography.fontSize.sm",
+        "weight": "typography.fontWeight.regular",
+        "lineHeight": "typography.lineHeight.normal",
+        "use": "Helper text, captions, metadata, timestamps.",
+        "constraints": ["Do not use for primary content labels or interactive element labels"]
+      },
+      {
+        "level": "caption",
+        "token": "typography.fontSize.xs",
+        "weight": "typography.fontWeight.regular",
+        "lineHeight": "typography.lineHeight.normal",
+        "use": "Fine print, legal text, secondary badge labels.",
+        "constraints": ["Must always meet 4.5:1 contrast ratio — xs size is below large text threshold"]
+      },
+      {
+        "level": "code",
+        "token": "typography.fontSize.sm",
+        "fontFamily": "typography.fontFamily.mono",
+        "weight": "typography.fontWeight.regular",
+        "lineHeight": "typography.lineHeight.relaxed",
+        "use": "Inline code, token paths, technical values.",
+        "constraints": ["Always use the mono font family for code; never mix sans-serif and monospace in the same token path"]
+      }
+    ],
+    "scale": {
+      "intent": "The type scale follows a 1.25 major third ratio. Neighbouring steps are visually distinct but harmonically related — xs through sm for supporting text, base for body, lg through 2xl for headings, 3xl and above for display use only.",
+      "productUI": "In product interfaces, 90% of text should sit between typography.fontSize.sm and typography.fontSize.xl. Reserve 2xl and above for page-level headings only.",
+      "marketingUI": "In marketing and landing pages, display and 4xl sizes are appropriate for hero content. Use sparingly — maximum two oversized steps per page."
+    },
+    "pairings": [
+      {
+        "name": "Heading + body",
+        "heading": "typography.fontFamily.sans at fontWeight.bold",
+        "body": "typography.fontFamily.sans at fontWeight.regular",
+        "use": "Standard product UI. All headings and body text use the same sans-serif family — hierarchy comes from size and weight, not font switching."
+      },
+      {
+        "name": "Heading + code",
+        "heading": "typography.fontFamily.sans at fontWeight.semibold",
+        "body": "typography.fontFamily.mono at fontWeight.regular",
+        "use": "Developer documentation, API reference, token specification views."
+      }
+    ],
+    "lineLength": {
+      "prose": "65-75 characters (approximately 32-36em at base size). Use max-width: 72ch for all prose containers.",
+      "formLabels": "No max-width restriction — labels wrap naturally with their input.",
+      "dataTableCells": "Constrain cell content with overflow: hidden / text-overflow: ellipsis at a column-level max-width, not a character limit."
+    }
+  },
+  "compositionPatterns": [
+    {
+      "name": "Form layout",
+      "description": "A single-column form with field groups, section headings, and a primary action at the bottom.",
+      "components": ["form", "input", "select", "checkbox", "button"],
+      "spacingConventions": {
+        "betweenFields": "spacing.4 (16px)",
+        "betweenFieldGroups": "spacing.8 (32px)",
+        "betweenSectionHeadingAndFirstField": "spacing.4 (16px)",
+        "formMaxWidth": "640px"
+      },
+      "slots": {
+        "section-heading": "h2 or h3 with typographic hierarchy matching page context",
+        "field": "input or select wrapped with label and optional helper text",
+        "action-row": "Primary button + optional secondary button, right-aligned on desktop, stacked full-width on mobile"
+      },
+      "notes": "Never place two primary buttons in the same form. Destructive actions (e.g. Delete account) belong outside the primary form flow, separated by spacing.16 or a visual divider."
+    },
+    {
+      "name": "Card grid",
+      "description": "A responsive grid of cards, each representing one entity or item.",
+      "components": ["card", "badge", "button"],
+      "spacingConventions": {
+        "gapBetweenCards": "spacing.6 (24px)",
+        "cardInternalPadding": "spacing.6 (24px)",
+        "betweenCardGridAndSectionHeading": "spacing.8 (32px)"
+      },
+      "slots": {
+        "card-header": "Entity name (h3 or h4), optional badge for status",
+        "card-body": "One to three lines of supporting text at typography.fontSize.sm",
+        "card-footer": "Primary action or metadata row"
+      },
+      "notes": "Cards should have consistent height within a row. If card content length varies significantly, use a fixed-height card with overflow hidden rather than variable-height cards that break the grid rhythm."
+    },
+    {
+      "name": "Dashboard shell",
+      "description": "A full-page application shell with persistent navigation on the left and a scrollable main content area on the right.",
+      "components": ["navigation", "card", "table", "badge"],
+      "spacingConventions": {
+        "navigationWidth": "240px (desktop), collapsible on tablet, hidden on mobile",
+        "mainContentPadding": "spacing.8 (32px) on desktop, spacing.4 (16px) on mobile",
+        "betweenDashboardSections": "spacing.16 (64px)",
+        "betweenWidgetsInRow": "spacing.6 (24px)"
+      },
+      "slots": {
+        "nav": "Navigation component — vertical, with aria-label='Main navigation'",
+        "main": "Main content area — landmark role main, scrollable",
+        "header": "Page title (h1) + optional contextual action buttons",
+        "content": "One or more card rows, data tables, or widget grids"
+      },
+      "notes": "The navigation and main area should be siblings inside a CSS grid or flexbox container. Do not use nested scrolling containers — only the main area scrolls."
+    },
+    {
+      "name": "Dialog composition",
+      "description": "A modal dialog for confirmations, forms, or focused interactions that interrupt the primary flow.",
+      "components": ["modal", "input", "select", "button"],
+      "spacingConventions": {
+        "dialogPadding": "spacing.6 (24px)",
+        "betweenTitleAndBody": "spacing.4 (16px)",
+        "betweenBodyAndActions": "spacing.6 (24px)",
+        "dialogMaxWidth": "560px (confirmation), 640px (form)"
+      },
+      "slots": {
+        "title": "h2 — concise action phrase ('Delete this item?', 'Edit profile')",
+        "body": "Explanation text and optional form fields",
+        "actions": "Right-aligned button group: primary action + Cancel. Destructive dialogs use the destructive button variant for the primary action."
+      },
+      "notes": "Modal dialogs must trap focus. The Cancel button must always be available and must not be styled as a ghost button when the primary action is destructive — use secondary variant to ensure equal visual weight for the safe option."
+    },
+    {
+      "name": "Notification pattern",
+      "description": "Short-lived feedback messages using toast, and persistent inline feedback using badge or inline text.",
+      "components": ["toast", "badge"],
+      "spacingConventions": {
+        "toastStackGap": "spacing.2 (8px)",
+        "toastOffset": "spacing.4 (16px) from the viewport edge"
+      },
+      "slots": {
+        "toast-icon": "Optional leading icon conveying severity (success / warning / error)",
+        "toast-message": "One sentence at typography.fontSize.sm. No bullet points.",
+        "toast-action": "Optional single text link for an undo or view action"
+      },
+      "notes": "Toasts are ephemeral — do not use them for errors that require user action. Errors that block progress belong inline, adjacent to the field or action that caused them. Use badge for persistent status, toast for transient confirmation."
+    }
+  ]
+}

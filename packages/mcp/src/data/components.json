@@ -1,0 +1,1566 @@
+{
+  "button": {
+    "name": "Button",
+    "type": "button",
+    "description": "Primary interactive element for triggering actions. Use for form submissions, confirmations, and navigation.",
+    "variants": [
+      "primary",
+      "secondary",
+      "ghost",
+      "destructive"
+    ],
+    "sizes": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "states": [
+      "default",
+      "hover",
+      "active",
+      "disabled",
+      "loading"
+    ],
+    "props": {
+      "variant": {
+        "type": "enum",
+        "values": [
+          "primary",
+          "secondary",
+          "ghost",
+          "destructive"
+        ],
+        "default": "primary"
+      },
+      "size": {
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false
+      },
+      "loading": {
+        "type": "boolean",
+        "default": false,
+        "description": "Shows a loading spinner and disables interaction"
+      },
+      "fullWidth": {
+        "type": "boolean",
+        "default": false
+      },
+      "leftIcon": {
+        "type": "ReactNode",
+        "optional": true
+      },
+      "rightIcon": {
+        "type": "ReactNode",
+        "optional": true
+      },
+      "children": {
+        "type": "ReactNode",
+        "required": true,
+        "description": "Button label text or content"
+      }
+    },
+    "tokens": {
+      "background": {
+        "primary": "{color.semantic.action.primary}",
+        "primary-hover": "{color.semantic.action.primaryHover}",
+        "secondary": "transparent",
+        "secondary-hover": "{color.neutral.50}",
+        "ghost": "transparent",
+        "ghost-hover": "{color.neutral.100}",
+        "destructive": "{color.error.default}",
+        "destructive-hover": "{color.error.dark}",
+        "disabled": "{color.neutral.100}"
+      },
+      "text": {
+        "primary": "{color.semantic.action.primaryText}",
+        "secondary": "{color.semantic.action.primary}",
+        "ghost": "{color.semantic.text.primary}",
+        "destructive": "{color.neutral.0}",
+        "disabled": "{color.semantic.text.disabled}"
+      },
+      "border": {
+        "secondary": "{color.semantic.action.primary}",
+        "others": "transparent"
+      },
+      "spacing": {
+        "sm": {
+          "paddingY": "{spacing.1}",
+          "paddingX": "{spacing.3}",
+          "gap": "{spacing.1}"
+        },
+        "md": {
+          "paddingY": "{spacing.2}",
+          "paddingX": "{spacing.4}",
+          "gap": "{spacing.2}"
+        },
+        "lg": {
+          "paddingY": "{spacing.3}",
+          "paddingX": "{spacing.6}",
+          "gap": "{spacing.2}"
+        }
+      },
+      "typography": {
+        "sm": "{typography.textStyle.label}",
+        "md": "{typography.textStyle.label}",
+        "lg": "{typography.textStyle.body}"
+      },
+      "borderRadius": "{borderRadius.md}",
+      "focusRing": "{color.semantic.border.focus}"
+    },
+    "constraints": [
+      "Always use an approved variant; never use arbitrary background colors on buttons",
+      "Use the 'destructive' variant only for irreversible actions (delete, remove)",
+      "A loading button must disable all interaction and show a spinner",
+      "Minimum touch target is 44×44px to meet WCAG accessibility requirements",
+      "Button labels should be sentence case (e.g. 'Save changes', not 'SAVE CHANGES')",
+      "Do not use more than one primary button per section or form",
+      "Icon-only buttons must include an aria-label describing the action"
+    ],
+    "accessibility": {
+      "role": "button",
+      "minTouchTarget": "44px",
+      "focusVisible": true,
+      "keyboardSupport": [
+        "Enter",
+        "Space"
+      ],
+      "ariaRequired": [
+        "aria-label when icon-only",
+        "aria-disabled when disabled",
+        "aria-busy when loading"
+      ]
+    },
+    "anatomy": {
+      "root": "button[role='button']",
+      "slots": {
+        "leftIcon": "Optional leading icon slot",
+        "label": "Required text content slot",
+        "rightIcon": "Optional trailing icon slot",
+        "spinner": "Loading indicator (visible only when loading=true)"
+      },
+      "validChildren": [
+        "Icon",
+        "text"
+      ],
+      "compositionNotes": "Icon children should use the Icon component. Label text is required; icon-only buttons must provide aria-label."
+    },
+    "relationships": {
+      "parent": null,
+      "siblings": [
+        "Link"
+      ],
+      "related": [
+        "IconButton",
+        "ButtonGroup"
+      ],
+      "children": [],
+      "composedIn": [
+        "Form",
+        "Modal",
+        "Toast",
+        "Card"
+      ]
+    },
+    "variantGuidance": {
+      "primary": "Default action; use for the single most important action per page section. Do not use more than one per form or section.",
+      "secondary": "Supporting actions; use alongside a primary button for secondary choices (e.g. Cancel next to Submit).",
+      "ghost": "Tertiary or low-emphasis actions; use in toolbars, cards, or anywhere visual weight should be minimal.",
+      "destructive": "Irreversible destructive actions only (delete, remove, revoke). Always pair with a confirmation dialog."
+    }
+  },
+  "input": {
+    "name": "Input",
+    "type": "input",
+    "description": "Single-line text input for collecting user data. Always pair with a visible label.",
+    "variants": [
+      "default",
+      "error",
+      "success"
+    ],
+    "sizes": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "states": [
+      "default",
+      "focus",
+      "filled",
+      "error",
+      "disabled"
+    ],
+    "props": {
+      "size": {
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      "variant": {
+        "type": "enum",
+        "values": [
+          "default",
+          "error",
+          "success"
+        ],
+        "default": "default"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false
+      },
+      "required": {
+        "type": "boolean",
+        "default": false
+      },
+      "label": {
+        "type": "string",
+        "optional": false,
+        "description": "Visible label text — always required"
+      },
+      "helperText": {
+        "type": "string",
+        "optional": true,
+        "description": "Supporting instruction below the input"
+      },
+      "errorMessage": {
+        "type": "string",
+        "optional": true,
+        "description": "Validation error shown when variant is 'error'"
+      },
+      "placeholder": {
+        "type": "string",
+        "optional": true,
+        "description": "Hint text inside the field — not a substitute for a label"
+      },
+      "leftIcon": {
+        "type": "ReactNode",
+        "optional": true
+      },
+      "rightIcon": {
+        "type": "ReactNode",
+        "optional": true
+      }
+    },
+    "tokens": {
+      "background": {
+        "default": "{color.neutral.0}",
+        "disabled": "{color.neutral.100}"
+      },
+      "text": {
+        "value": "{color.semantic.text.primary}",
+        "placeholder": "{color.neutral.400}",
+        "disabled": "{color.semantic.text.disabled}"
+      },
+      "border": {
+        "default": "{color.semantic.border.default}",
+        "focus": "{color.semantic.border.focus}",
+        "error": "{color.error.default}",
+        "success": "{color.success.default}",
+        "disabled": "{color.neutral.200}"
+      },
+      "label": "{typography.textStyle.label}",
+      "helperText": "{typography.textStyle.body-sm}",
+      "inputText": "{typography.textStyle.body}",
+      "spacing": {
+        "sm": {
+          "paddingY": "{spacing.1}",
+          "paddingX": "{spacing.2}"
+        },
+        "md": {
+          "paddingY": "{spacing.2}",
+          "paddingX": "{spacing.3}"
+        },
+        "lg": {
+          "paddingY": "{spacing.3}",
+          "paddingX": "{spacing.4}"
+        }
+      },
+      "borderRadius": "{borderRadius.md}"
+    },
+    "constraints": [
+      "Every input must have a visible label — do not rely on placeholder text alone",
+      "Error messages must be linked to the input via aria-describedby",
+      "Do not use placeholder text as a substitute for a label",
+      "Input borders must achieve 3:1 contrast ratio against the background (WCAG 1.4.11)",
+      "Display error state and errorMessage together — never show one without the other",
+      "Helper text and error messages must not overlap; show only the error when invalid"
+    ],
+    "accessibility": {
+      "role": "textbox",
+      "labelRequired": true,
+      "ariaRequired": [
+        "associated label element or aria-label",
+        "aria-describedby pointing to helperText or errorMessage",
+        "aria-invalid='true' when variant is 'error'",
+        "aria-disabled='true' when disabled"
+      ]
+    },
+    "anatomy": {
+      "root": "div.input-wrapper",
+      "slots": {
+        "label": "Required visible label element (label[for])",
+        "field": "The native input[type] element",
+        "helperText": "Optional guidance text below the field",
+        "errorMessage": "Error text shown when state='error'",
+        "leadingIcon": "Optional icon inside the left edge of the field",
+        "trailingIcon": "Optional icon inside the right edge of the field",
+        "clearButton": "Optional clear/reset button (trailingIcon slot)"
+      },
+      "validChildren": [
+        "Icon"
+      ],
+      "compositionNotes": "Always pair with a visible label. Error and helper text should not be shown simultaneously."
+    },
+    "relationships": {
+      "parent": "FormField",
+      "siblings": [
+        "Select",
+        "Checkbox",
+        "Textarea"
+      ],
+      "related": [
+        "Form",
+        "Label"
+      ],
+      "children": [],
+      "composedIn": [
+        "Form",
+        "LoginForm",
+        "SearchBar"
+      ]
+    },
+    "variantGuidance": {
+      "default": "Standard bordered input; use for most free-text form fields.",
+      "filled": "Filled/shaded background variant; use on light surfaces where more visual weight is needed.",
+      "outline": "Outlined variant with prominent border; use when the field needs to stand out on a dense layout.",
+      "error": "Set automatically via state='error'; do not set variant='error' directly — use state prop."
+    }
+  },
+  "card": {
+    "name": "Card",
+    "type": "card",
+    "description": "Container for grouping related content into a visually distinct surface.",
+    "variants": [
+      "default",
+      "outlined",
+      "elevated"
+    ],
+    "props": {
+      "variant": {
+        "type": "enum",
+        "values": [
+          "default",
+          "outlined",
+          "elevated"
+        ],
+        "default": "default"
+      },
+      "padding": {
+        "type": "enum",
+        "values": [
+          "none",
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      "interactive": {
+        "type": "boolean",
+        "default": false,
+        "description": "Adds hover/focus states for clickable cards (e.g. link cards)"
+      }
+    },
+    "tokens": {
+      "background": {
+        "default": "{color.neutral.0}",
+        "subtle": "{color.neutral.50}"
+      },
+      "border": {
+        "outlined": "{color.semantic.border.default}",
+        "others": "transparent"
+      },
+      "shadow": {
+        "default": "{shadow.none}",
+        "elevated": "{shadow.md}",
+        "interactive-hover": "{shadow.lg}"
+      },
+      "padding": {
+        "none": "{spacing.0}",
+        "sm": "{spacing.4}",
+        "md": "{spacing.6}",
+        "lg": "{spacing.8}"
+      },
+      "borderRadius": "{borderRadius.lg}"
+    },
+    "constraints": [
+      "Do not nest interactive cards inside other interactive cards",
+      "Elevated cards should not be used on dark or colored backgrounds without a token adjustment",
+      "Internal card content must use the established spacing scale — no arbitrary padding values",
+      "If a card is entirely clickable, wrap it in an anchor element and set an appropriate aria-label"
+    ],
+    "accessibility": {
+      "role": "region or article (context-dependent)",
+      "interactiveNote": "When interactive=true the card must be keyboard-focusable and have a visible focus ring",
+      "ariaRequired": [
+        "aria-label when interactive and no visible heading present"
+      ]
+    },
+    "anatomy": {
+      "root": "div[role='region'] or article",
+      "slots": {
+        "header": "Optional card header — title and optional actions",
+        "media": "Optional image or media area at the top of the card",
+        "body": "Primary content area",
+        "footer": "Optional footer — typically actions (buttons)"
+      },
+      "validChildren": [
+        "Button",
+        "Badge",
+        "Image",
+        "Heading",
+        "Text"
+      ],
+      "compositionNotes": "Cards are layout containers. The footer slot is the canonical place for action buttons. Do not nest cards."
+    },
+    "relationships": {
+      "parent": null,
+      "siblings": [
+        "Modal",
+        "Panel"
+      ],
+      "related": [
+        "Badge",
+        "Button",
+        "Heading"
+      ],
+      "children": [
+        "Badge",
+        "Button"
+      ],
+      "composedIn": [
+        "Grid",
+        "List",
+        "Dashboard"
+      ]
+    },
+    "variantGuidance": {
+      "default": "Flat white card with border; use for content grouping on white or light-gray backgrounds.",
+      "elevated": "Card with shadow; use when the card needs to appear above the page surface (e.g. on colored backgrounds).",
+      "outline": "Card with only a border, no shadow; use in dense layouts or on white backgrounds where shadow looks heavy.",
+      "interactive": "Clickable card variant with hover/focus states; use when the entire card is a navigation target."
+    }
+  },
+  "badge": {
+    "name": "Badge",
+    "type": "badge",
+    "description": "Small label used to convey status, counts, or categorical metadata. Purely informational — not interactive.",
+    "variants": [
+      "primary",
+      "success",
+      "warning",
+      "error",
+      "neutral"
+    ],
+    "sizes": [
+      "sm",
+      "md"
+    ],
+    "props": {
+      "variant": {
+        "type": "enum",
+        "values": [
+          "primary",
+          "success",
+          "warning",
+          "error",
+          "neutral"
+        ],
+        "default": "neutral"
+      },
+      "size": {
+        "type": "enum",
+        "values": [
+          "sm",
+          "md"
+        ],
+        "default": "md"
+      },
+      "dot": {
+        "type": "boolean",
+        "default": false,
+        "description": "Renders a colored dot instead of text — useful for status indicators"
+      }
+    },
+    "tokens": {
+      "background": {
+        "primary": "{color.primary.50}",
+        "success": "{color.success.light}",
+        "warning": "{color.warning.light}",
+        "error": "{color.error.light}",
+        "neutral": "{color.neutral.100}"
+      },
+      "text": {
+        "primary": "{color.primary.700}",
+        "success": "{color.success.dark}",
+        "warning": "{color.warning.dark}",
+        "error": "{color.error.dark}",
+        "neutral": "{color.neutral.700}"
+      },
+      "typography": "{typography.textStyle.label}",
+      "borderRadius": "{borderRadius.full}",
+      "spacing": {
+        "sm": {
+          "paddingY": "{spacing.0}",
+          "paddingX": "{spacing.2}"
+        },
+        "md": {
+          "paddingY": "{spacing.1}",
+          "paddingX": "{spacing.2}"
+        }
+      }
+    },
+    "constraints": [
+      "Do not use a badge as an interactive element — use a button or tag component instead",
+      "Badge text should be 1–3 words maximum; longer strings break the visual compact form",
+      "Never use arbitrary colors; only approved variants are permitted",
+      "Dot badges must include a visually hidden text label for screen readers"
+    ],
+    "accessibility": {
+      "role": "status (implicit)",
+      "ariaRequired": [
+        "aria-label or visually hidden text when using dot variant"
+      ]
+    },
+    "anatomy": {
+      "root": "span[role='status'] or span",
+      "slots": {
+        "icon": "Optional leading icon",
+        "label": "Text label (required unless dot variant)"
+      },
+      "validChildren": [
+        "Icon",
+        "text"
+      ],
+      "compositionNotes": "Badge is an inline element. When used to indicate status on another component, position it as a child of that component's overlay slot."
+    },
+    "relationships": {
+      "parent": null,
+      "siblings": [
+        "Tag",
+        "Chip"
+      ],
+      "related": [
+        "Icon",
+        "StatusIndicator"
+      ],
+      "children": [],
+      "composedIn": [
+        "Card",
+        "NavigationItem",
+        "Avatar",
+        "TableCell"
+      ]
+    },
+    "variantGuidance": {
+      "default": "Neutral/gray; use for counts, labels, or informational metadata.",
+      "success": "Green; use for completed, active, or positive status.",
+      "warning": "Yellow/amber; use for pending, at-risk, or cautionary status.",
+      "error": "Red; use for failed, blocked, or critical status.",
+      "info": "Blue; use for informational or in-progress status."
+    }
+  },
+  "modal": {
+    "name": "Modal",
+    "type": "modal",
+    "description": "Dialog overlay that interrupts the current flow to request a decision or display critical information. Use sparingly — prefer inline patterns when possible.",
+    "variants": [
+      "default",
+      "alert",
+      "fullscreen"
+    ],
+    "sizes": [
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "states": [
+      "open",
+      "closed"
+    ],
+    "props": {
+      "isOpen": {
+        "type": "boolean",
+        "required": true,
+        "description": "Controls visibility of the modal"
+      },
+      "onClose": {
+        "type": "function",
+        "required": true,
+        "description": "Callback invoked when the modal requests to close"
+      },
+      "title": {
+        "type": "string",
+        "required": true,
+        "description": "Heading displayed in the modal header"
+      },
+      "size": {
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "default": "md"
+      },
+      "closeOnOverlayClick": {
+        "type": "boolean",
+        "default": true,
+        "description": "Dismiss the modal when clicking the backdrop overlay"
+      },
+      "children": {
+        "type": "ReactNode",
+        "required": true,
+        "description": "Modal body content"
+      }
+    },
+    "tokens": {
+      "overlay": {
+        "background": "rgb(0 0 0 / 0.5)"
+      },
+      "content": {
+        "background": "{color.neutral.0}",
+        "borderRadius": "{borderRadius.xl}",
+        "padding": "{spacing.6}",
+        "shadow": "{shadow.xl}"
+      },
+      "zIndex": "{layout.zIndex.modal}",
+      "width": {
+        "sm": "380px",
+        "md": "512px",
+        "lg": "672px",
+        "xl": "896px"
+      }
+    },
+    "constraints": [
+      "Every modal must have a descriptive title visible in the header",
+      "The alert variant is reserved for destructive or irreversible confirmations only",
+      "Focus must be trapped inside the modal while it is open",
+      "Pressing Escape must close non-alert modals",
+      "Scroll must be locked on the document body while a modal is open",
+      "Do not stack more than two modals — prefer wizards or multi-step flows instead",
+      "fullscreen variant should only be used on mobile or for immersive content"
+    ],
+    "accessibility": {
+      "role": "dialog",
+      "ariaRequired": [
+        "aria-modal='true'",
+        "aria-labelledby pointing to the modal title element",
+        "aria-describedby pointing to the modal body when content is descriptive"
+      ],
+      "focusBehavior": "Move focus to first focusable element on open; return focus to trigger element on close",
+      "keyboardSupport": [
+        "Escape to close",
+        "Tab / Shift+Tab to cycle within modal"
+      ],
+      "focusTrap": true
+    },
+    "anatomy": {
+      "root": "div[role='dialog'][aria-modal='true']",
+      "slots": {
+        "overlay": "Full-screen backdrop behind the modal",
+        "container": "The modal panel itself",
+        "header": "Title bar — title text and optional close button",
+        "body": "Scrollable content area",
+        "footer": "Action buttons area (confirm, cancel, etc.)"
+      },
+      "validChildren": [
+        "Button",
+        "Form",
+        "Input",
+        "Select",
+        "Heading",
+        "Text"
+      ],
+      "compositionNotes": "Focus must be trapped inside the modal while open. The first interactive element receives focus on open. Escape key closes."
+    },
+    "relationships": {
+      "parent": null,
+      "siblings": [
+        "Drawer",
+        "Popover"
+      ],
+      "related": [
+        "Overlay",
+        "Button",
+        "Form"
+      ],
+      "children": [
+        "Button",
+        "Form"
+      ],
+      "composedIn": [
+        "ConfirmDialog",
+        "FormDialog",
+        "ImagePreview"
+      ]
+    },
+    "variantGuidance": {
+      "default": "Standard dialog modal; use for confirmations, forms, and detail views that require full user attention.",
+      "alert": "Destructive or critical alert; use for irreversible confirmations. Smaller, no close icon.",
+      "fullscreen": "Full-screen modal on mobile; use for complex flows that need maximum screen real estate."
+    }
+  },
+  "select": {
+    "name": "Select",
+    "type": "select",
+    "description": "Dropdown select input for choosing one option from a list. Use when there are five or more options; prefer radio buttons for fewer choices.",
+    "variants": [
+      "default",
+      "error",
+      "success"
+    ],
+    "sizes": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "states": [
+      "default",
+      "focus",
+      "open",
+      "filled",
+      "error",
+      "disabled"
+    ],
+    "props": {
+      "size": {
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      "variant": {
+        "type": "enum",
+        "values": [
+          "default",
+          "error",
+          "success"
+        ],
+        "default": "default"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false
+      },
+      "required": {
+        "type": "boolean",
+        "default": false
+      },
+      "label": {
+        "type": "string",
+        "required": true,
+        "description": "Visible label text — always required"
+      },
+      "helperText": {
+        "type": "string",
+        "optional": true,
+        "description": "Supporting instruction below the select"
+      },
+      "errorMessage": {
+        "type": "string",
+        "optional": true,
+        "description": "Validation error shown when variant is 'error'"
+      },
+      "options": {
+        "type": "Array<{ value: string; label: string; disabled?: boolean }>",
+        "required": true,
+        "description": "List of selectable options"
+      },
+      "value": {
+        "type": "string",
+        "optional": true,
+        "description": "Currently selected value (controlled)"
+      },
+      "onChange": {
+        "type": "function",
+        "required": true,
+        "description": "Callback with new value on change"
+      }
+    },
+    "tokens": {
+      "background": {
+        "default": "{color.neutral.0}",
+        "disabled": "{color.neutral.100}"
+      },
+      "text": {
+        "value": "{color.semantic.text.primary}",
+        "placeholder": "{color.neutral.400}",
+        "disabled": "{color.semantic.text.disabled}"
+      },
+      "border": {
+        "default": "{color.semantic.border.default}",
+        "focus": "{color.semantic.border.focus}",
+        "error": "{color.error.default}",
+        "success": "{color.success.default}",
+        "disabled": "{color.neutral.200}"
+      },
+      "dropdown": {
+        "background": "{color.neutral.0}",
+        "shadow": "{shadow.lg}",
+        "borderRadius": "{borderRadius.md}",
+        "optionHover": "{color.neutral.50}",
+        "optionActive": "{color.primary.50}"
+      },
+      "label": "{typography.textStyle.label}",
+      "inputText": "{typography.textStyle.body}",
+      "spacing": {
+        "sm": {
+          "paddingY": "{spacing.1}",
+          "paddingX": "{spacing.2}"
+        },
+        "md": {
+          "paddingY": "{spacing.2}",
+          "paddingX": "{spacing.3}"
+        },
+        "lg": {
+          "paddingY": "{spacing.3}",
+          "paddingX": "{spacing.4}"
+        }
+      },
+      "borderRadius": "{borderRadius.md}"
+    },
+    "constraints": [
+      "Every select must have a visible label — do not rely on placeholder alone",
+      "Error messages must be linked to the control via aria-describedby",
+      "Do not use select for binary yes/no choices — use a checkbox or toggle instead",
+      "Option lists longer than 10 items should consider a searchable combobox instead",
+      "Display error state and errorMessage together — never show one without the other"
+    ],
+    "accessibility": {
+      "role": "combobox",
+      "ariaRequired": [
+        "associated label element or aria-label",
+        "aria-expanded indicating open/closed state",
+        "aria-haspopup='listbox'",
+        "aria-describedby pointing to helperText or errorMessage",
+        "aria-invalid='true' when variant is 'error'",
+        "aria-disabled='true' when disabled"
+      ],
+      "keyboardSupport": [
+        "Enter / Space to open",
+        "Arrow keys to navigate options",
+        "Escape to close",
+        "Home / End to jump to first / last option"
+      ]
+    },
+    "anatomy": {
+      "root": "div.select-wrapper",
+      "slots": {
+        "label": "Required visible label element",
+        "trigger": "The visible select button/control",
+        "icon": "Trailing chevron icon in the trigger",
+        "listbox": "The dropdown list container (role='listbox')",
+        "option": "Individual option items (role='option')",
+        "helperText": "Optional guidance text below the trigger",
+        "errorMessage": "Error text shown in error state"
+      },
+      "validChildren": [
+        "Option"
+      ],
+      "compositionNotes": "Always provide a visible label. For multi-select, add aria-multiselectable='true' on the listbox."
+    },
+    "relationships": {
+      "parent": "FormField",
+      "siblings": [
+        "Input",
+        "Checkbox",
+        "RadioGroup"
+      ],
+      "related": [
+        "Form",
+        "Label",
+        "ComboBox"
+      ],
+      "children": [],
+      "composedIn": [
+        "Form",
+        "FilterBar",
+        "Settings"
+      ]
+    },
+    "variantGuidance": {
+      "default": "Standard bordered select; use for most option-selection scenarios.",
+      "filled": "Filled background variant; matches the Input filled variant.",
+      "outline": "Outlined variant with prominent border."
+    }
+  },
+  "checkbox": {
+    "name": "Checkbox",
+    "type": "checkbox",
+    "description": "Binary or tri-state input for selecting one or multiple items from a list. Always pair with a visible label.",
+    "variants": [
+      "default",
+      "error"
+    ],
+    "states": [
+      "unchecked",
+      "checked",
+      "indeterminate",
+      "disabled"
+    ],
+    "props": {
+      "checked": {
+        "type": "boolean",
+        "default": false,
+        "description": "Whether the checkbox is checked (controlled)"
+      },
+      "indeterminate": {
+        "type": "boolean",
+        "default": false,
+        "description": "Tri-state indeterminate visual — used for parent checkboxes in a group"
+      },
+      "disabled": {
+        "type": "boolean",
+        "default": false
+      },
+      "label": {
+        "type": "string",
+        "required": true,
+        "description": "Visible label text beside the checkbox"
+      },
+      "helperText": {
+        "type": "string",
+        "optional": true,
+        "description": "Supporting instruction below the label"
+      },
+      "errorMessage": {
+        "type": "string",
+        "optional": true,
+        "description": "Validation error shown when variant is 'error'"
+      },
+      "onChange": {
+        "type": "function",
+        "required": true,
+        "description": "Callback with new checked value on change"
+      }
+    },
+    "tokens": {
+      "control": {
+        "background": {
+          "unchecked": "{color.neutral.0}",
+          "checked": "{color.semantic.action.primary}",
+          "indeterminate": "{color.semantic.action.primary}",
+          "disabled": "{color.neutral.100}"
+        },
+        "border": {
+          "unchecked": "{color.semantic.border.default}",
+          "checked": "{color.semantic.action.primary}",
+          "indeterminate": "{color.semantic.action.primary}",
+          "error": "{color.error.default}",
+          "disabled": "{color.neutral.200}"
+        },
+        "checkmark": "{color.neutral.0}",
+        "size": "16px",
+        "borderRadius": "{borderRadius.sm}"
+      },
+      "label": "{typography.textStyle.body}",
+      "helperText": "{typography.textStyle.body-sm}",
+      "errorText": "{color.error.dark}",
+      "focusRing": "{color.semantic.border.focus}"
+    },
+    "constraints": [
+      "Always provide a visible label — a standalone checkbox is inaccessible",
+      "Use indeterminate only for parent checkboxes that partially select a child group",
+      "Disabled checkboxes must not be the only way to convey required state",
+      "Group related checkboxes inside a fieldset with a legend",
+      "Error state and errorMessage must appear together"
+    ],
+    "accessibility": {
+      "role": "checkbox",
+      "ariaRequired": [
+        "associated label element or aria-label",
+        "aria-checked='mixed' when indeterminate",
+        "aria-invalid='true' when variant is 'error'",
+        "aria-disabled='true' when disabled",
+        "aria-describedby pointing to helperText or errorMessage"
+      ],
+      "keyboardSupport": [
+        "Space to toggle"
+      ]
+    },
+    "anatomy": {
+      "root": "label.checkbox-wrapper",
+      "slots": {
+        "input": "Native input[type='checkbox'] (visually hidden)",
+        "indicator": "Custom styled checkbox box/checkmark visual",
+        "label": "Text label for the checkbox",
+        "helperText": "Optional description text"
+      },
+      "validChildren": [
+        "text"
+      ],
+      "compositionNotes": "The label element wraps both input and label text for accessible click area. For checkbox groups, use role='group' with a fieldset/legend."
+    },
+    "relationships": {
+      "parent": "FormField",
+      "siblings": [
+        "Radio",
+        "Toggle",
+        "Switch"
+      ],
+      "related": [
+        "Form",
+        "CheckboxGroup"
+      ],
+      "children": [],
+      "composedIn": [
+        "Form",
+        "FilterPanel",
+        "Settings",
+        "Table"
+      ]
+    },
+    "variantGuidance": {
+      "default": "Standard checkbox; use for binary on/off choices or multi-select within a group.",
+      "indeterminate": "Partially-checked state; use when a parent checkbox represents a group where some (but not all) children are selected."
+    }
+  },
+  "toast": {
+    "name": "Toast",
+    "type": "toast",
+    "description": "Transient notification that appears at the edge of the screen to communicate feedback without interrupting the user's flow.",
+    "variants": [
+      "info",
+      "success",
+      "warning",
+      "error"
+    ],
+    "states": [
+      "visible",
+      "dismissed"
+    ],
+    "props": {
+      "variant": {
+        "type": "enum",
+        "values": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ],
+        "default": "info"
+      },
+      "title": {
+        "type": "string",
+        "optional": true,
+        "description": "Short headline for the notification"
+      },
+      "message": {
+        "type": "string",
+        "required": true,
+        "description": "Main notification body text"
+      },
+      "duration": {
+        "type": "number",
+        "default": 5000,
+        "description": "Auto-dismiss delay in milliseconds; 0 disables auto-dismiss"
+      },
+      "dismissible": {
+        "type": "boolean",
+        "default": true,
+        "description": "Renders a close button for manual dismissal"
+      },
+      "action": {
+        "type": "{ label: string; onClick: () => void }",
+        "optional": true,
+        "description": "Optional inline action link/button"
+      }
+    },
+    "tokens": {
+      "background": {
+        "info": "{color.primary.50}",
+        "success": "{color.success.light}",
+        "warning": "{color.warning.light}",
+        "error": "{color.error.light}"
+      },
+      "text": {
+        "info": "{color.primary.700}",
+        "success": "{color.success.dark}",
+        "warning": "{color.warning.dark}",
+        "error": "{color.error.dark}"
+      },
+      "icon": {
+        "info": "{color.primary.600}",
+        "success": "{color.success.default}",
+        "warning": "{color.warning.default}",
+        "error": "{color.error.default}"
+      },
+      "borderRadius": "{borderRadius.lg}",
+      "shadow": "{shadow.lg}",
+      "padding": "{spacing.4}",
+      "maxWidth": "400px",
+      "zIndex": "{layout.zIndex.toast}"
+    },
+    "constraints": [
+      "Toasts must not contain critical information the user cannot recover if missed",
+      "Use error toasts sparingly — prefer inline form errors for field-level issues",
+      "Auto-dismiss duration must be at least 4000ms to meet WCAG 2.2.1 timing requirements",
+      "Toasts with action links must not auto-dismiss while the action is still relevant",
+      "Do not stack more than three toasts simultaneously; queue additional ones"
+    ],
+    "accessibility": {
+      "role": "alert",
+      "ariaRequired": [
+        "role='alert' for error/warning (polite interrupt) or role='status' for info/success",
+        "aria-live='assertive' for error, aria-live='polite' for info and success",
+        "aria-label on the dismiss button"
+      ],
+      "keyboardSupport": [
+        "Escape to dismiss focused toast"
+      ]
+    },
+    "anatomy": {
+      "root": "div[role='status'] or div[role='alert']",
+      "slots": {
+        "icon": "Status icon (auto-matched to variant)",
+        "content": "Message text area",
+        "title": "Optional bold title line",
+        "description": "Body text",
+        "action": "Optional inline action button",
+        "closeButton": "Dismiss button"
+      },
+      "validChildren": [
+        "Button",
+        "text"
+      ],
+      "compositionNotes": "Use role='alert' for error/warning toasts (assertive) and role='status' for success/info (polite). Render toasts in a fixed portal at the bottom/top of the viewport."
+    },
+    "relationships": {
+      "parent": null,
+      "siblings": [
+        "Alert",
+        "Banner",
+        "Snackbar"
+      ],
+      "related": [
+        "Icon",
+        "Button"
+      ],
+      "children": [],
+      "composedIn": [
+        "ToastProvider",
+        "NotificationCenter"
+      ]
+    },
+    "variantGuidance": {
+      "success": "Confirmed completion of a user-initiated action (saved, sent, created).",
+      "error": "Failure of a user-initiated action. Use role='alert'. Include a retry action where possible.",
+      "warning": "Non-blocking issue that needs attention but doesn't block the user.",
+      "info": "Neutral informational message (e.g. 'Your session will expire in 5 minutes')."
+    }
+  },
+  "navigation": {
+    "name": "Navigation",
+    "type": "navigation",
+    "description": "Top navigation bar providing site-wide wayfinding, branding, and primary actions.",
+    "variants": [
+      "default",
+      "transparent"
+    ],
+    "states": [
+      "default",
+      "scrolled"
+    ],
+    "props": {
+      "logo": {
+        "type": "ReactNode",
+        "required": true,
+        "description": "Brand logo or wordmark rendered on the left side"
+      },
+      "items": {
+        "type": "Array<{ label: string; href: string; icon?: ReactNode }>",
+        "required": true,
+        "description": "Primary navigation link items"
+      },
+      "activeItem": {
+        "type": "string",
+        "optional": true,
+        "description": "href value of the currently active navigation item"
+      },
+      "rightContent": {
+        "type": "ReactNode",
+        "optional": true,
+        "description": "Slot for right-aligned content such as user avatar or CTA button"
+      }
+    },
+    "tokens": {
+      "background": {
+        "default": "{color.neutral.0}",
+        "transparent": "transparent",
+        "scrolled": "{color.neutral.0}"
+      },
+      "text": {
+        "default": "{color.semantic.text.primary}",
+        "muted": "{color.semantic.text.secondary}",
+        "active": "{color.semantic.action.primary}"
+      },
+      "activeIndicator": {
+        "color": "{color.semantic.action.primary}",
+        "height": "2px",
+        "borderRadius": "{borderRadius.full}"
+      },
+      "border": {
+        "bottom": "{color.semantic.border.default}"
+      },
+      "height": "64px",
+      "padding": "{spacing.4}",
+      "shadow": "{shadow.sm}",
+      "zIndex": "{layout.zIndex.sticky}"
+    },
+    "constraints": [
+      "Do not add more than seven primary navigation items — use mega-menus or drawers for deep structures",
+      "The logo must link to the home page and carry an aria-label describing the site name",
+      "Active item must be visually distinct through color and an accessible indicator, not color alone",
+      "transparent variant must ensure sufficient contrast with page hero imagery below it",
+      "Navigation must remain accessible at 200% browser zoom"
+    ],
+    "accessibility": {
+      "role": "navigation",
+      "ariaRequired": [
+        "aria-label='Main navigation' on the nav element",
+        "aria-current='page' on the active item link"
+      ],
+      "keyboardSupport": [
+        "Tab to move between items",
+        "Enter to activate link"
+      ]
+    },
+    "anatomy": {
+      "root": "nav[aria-label]",
+      "slots": {
+        "logo": "Brand logo/wordmark at start of nav",
+        "primaryLinks": "Main navigation link list (ul/li)",
+        "secondaryLinks": "Secondary/utility links (settings, profile)",
+        "mobileMenuButton": "Hamburger/menu toggle for mobile",
+        "mobileMenu": "Mobile-only full-screen nav overlay"
+      },
+      "validChildren": [
+        "NavItem",
+        "Button",
+        "Icon",
+        "Avatar"
+      ],
+      "compositionNotes": "The nav element must have an accessible aria-label. Active items use aria-current='page'."
+    },
+    "relationships": {
+      "parent": null,
+      "siblings": [
+        "Sidebar",
+        "Breadcrumb",
+        "Tabs"
+      ],
+      "related": [
+        "NavigationItem",
+        "Button",
+        "Icon"
+      ],
+      "children": [
+        "NavigationItem"
+      ],
+      "composedIn": [
+        "AppLayout",
+        "Header"
+      ]
+    },
+    "variantGuidance": {
+      "horizontal": "Top navigation bar; use for primary global navigation in desktop layouts.",
+      "vertical": "Side navigation; use for app-level navigation in dashboard or admin layouts.",
+      "mobile": "Full-screen mobile navigation overlay; use below the mobile breakpoint."
+    }
+  },
+  "table": {
+    "name": "Table",
+    "type": "table",
+    "description": "Data table for displaying structured, comparative information in rows and columns.",
+    "variants": [
+      "default",
+      "striped",
+      "bordered"
+    ],
+    "states": [
+      "default",
+      "loading",
+      "empty"
+    ],
+    "props": {
+      "columns": {
+        "type": "Array<{ key: string; header: string; sortable?: boolean; width?: string }>",
+        "required": true,
+        "description": "Column definitions including header label and optional sort config"
+      },
+      "data": {
+        "type": "Array<Record<string, unknown>>",
+        "required": true,
+        "description": "Array of row data objects keyed to column keys"
+      },
+      "variant": {
+        "type": "enum",
+        "values": [
+          "default",
+          "striped",
+          "bordered"
+        ],
+        "default": "default"
+      },
+      "sortKey": {
+        "type": "string",
+        "optional": true,
+        "description": "Key of the currently sorted column"
+      },
+      "sortDir": {
+        "type": "enum",
+        "values": [
+          "asc",
+          "desc"
+        ],
+        "optional": true,
+        "description": "Current sort direction"
+      },
+      "onSort": {
+        "type": "function",
+        "optional": true,
+        "description": "Callback with (key, direction) when a sortable column header is clicked"
+      }
+    },
+    "tokens": {
+      "header": {
+        "background": "{color.neutral.50}",
+        "text": "{color.semantic.text.primary}",
+        "typography": "{typography.textStyle.label}",
+        "borderBottom": "{color.semantic.border.strong}"
+      },
+      "row": {
+        "background": "{color.neutral.0}",
+        "backgroundStriped": "{color.neutral.50}",
+        "backgroundHover": "{color.neutral.100}",
+        "text": "{color.semantic.text.primary}",
+        "typography": "{typography.textStyle.body}"
+      },
+      "border": "{color.semantic.border.default}",
+      "padding": {
+        "cell": {
+          "paddingY": "{spacing.3}",
+          "paddingX": "{spacing.4}"
+        }
+      },
+      "sortIcon": {
+        "default": "{color.neutral.400}",
+        "active": "{color.semantic.action.primary}"
+      }
+    },
+    "constraints": [
+      "Tables must not be used for layout — only for tabular data with logical row/column relationships",
+      "Every column must have a non-empty header label",
+      "Sortable columns must indicate sort direction with both a visual icon and aria attributes",
+      "Tables wider than their container must scroll horizontally, not clip content",
+      "Use the empty state slot when data is an empty array"
+    ],
+    "accessibility": {
+      "role": "table",
+      "ariaRequired": [
+        "aria-sort='ascending' or 'descending' on the active sort column header",
+        "scope='col' on th elements",
+        "aria-label or caption describing the table content",
+        "aria-live region to announce sort changes to screen readers"
+      ],
+      "keyboardSupport": [
+        "Enter / Space to toggle sort on focused column header"
+      ]
+    },
+    "anatomy": {
+      "root": "div[role='region'] > table",
+      "slots": {
+        "caption": "Accessible table title (visually hidden or visible)",
+        "thead": "Header row with column labels (th[scope='col'])",
+        "tbody": "Data rows",
+        "tfoot": "Optional footer row (totals, summaries)",
+        "emptyState": "Shown when tbody has no rows",
+        "paginationBar": "Optional pagination controls below the table"
+      },
+      "validChildren": [
+        "Badge",
+        "Button",
+        "Checkbox",
+        "Icon"
+      ],
+      "compositionNotes": "Wrap table in a scrollable container for overflow on small screens. Use th[scope='col'] for column headers and th[scope='row'] for row headers."
+    },
+    "relationships": {
+      "parent": null,
+      "siblings": [
+        "DataGrid",
+        "List"
+      ],
+      "related": [
+        "Checkbox",
+        "Badge",
+        "Pagination",
+        "Button"
+      ],
+      "children": [
+        "Checkbox",
+        "Badge",
+        "Button"
+      ],
+      "composedIn": [
+        "DataPage",
+        "AdminView",
+        "ReportView"
+      ]
+    },
+    "variantGuidance": {
+      "default": "Standard table with borders and alternating row backgrounds.",
+      "striped": "Alternating row background colors for readability in dense tables.",
+      "compact": "Reduced row height and padding; use when displaying many rows in limited vertical space.",
+      "bordered": "All-cell borders; use for financial or data-heavy tables requiring clear cell delineation."
+    }
+  },
+  "form": {
+    "name": "Form",
+    "type": "form",
+    "description": "Layout wrapper that organises form controls into a consistent vertical or horizontal structure. References Button, Input, Checkbox, and Select components for field composition.",
+    "variants": [
+      "vertical",
+      "horizontal"
+    ],
+    "props": {
+      "onSubmit": {
+        "type": "function",
+        "required": true,
+        "description": "Callback invoked with form data on valid submission"
+      },
+      "layout": {
+        "type": "enum",
+        "values": [
+          "vertical",
+          "horizontal"
+        ],
+        "default": "vertical",
+        "description": "Controls label placement relative to inputs"
+      },
+      "spacing": {
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md",
+        "description": "Gap between form fields"
+      }
+    },
+    "tokens": {
+      "gap": {
+        "sm": "{spacing.3}",
+        "md": "{spacing.5}",
+        "lg": "{spacing.8}"
+      },
+      "labelWidth": {
+        "horizontal": "160px",
+        "description": "Fixed label column width used in horizontal layout"
+      }
+    },
+    "relatedComponents": [
+      "button",
+      "input",
+      "checkbox",
+      "select"
+    ],
+    "constraints": [
+      "Always include at least one Button with type='submit' inside a Form",
+      "All fields within a Form must follow the label requirements of their respective components",
+      "Use horizontal layout only for simple forms with short labels and short inputs",
+      "Do not place a Form inside another Form — nested forms are invalid HTML",
+      "Provide an accessible name for the form via aria-label or an associated heading"
+    ],
+    "accessibility": {
+      "role": "form",
+      "ariaRequired": [
+        "aria-label or aria-labelledby linking to a visible form heading",
+        "novalidate attribute to use custom validation messaging",
+        "aria-describedby on the form element when global form errors are shown"
+      ],
+      "keyboardSupport": [
+        "Enter within a text input submits single-field forms",
+        "Tab to move between fields"
+      ]
+    },
+    "anatomy": {
+      "root": "form",
+      "slots": {
+        "fieldset": "Optional logical grouping of related fields (fieldset/legend)",
+        "field": "Individual form fields via FormField wrapper",
+        "actions": "Form submit/cancel button row at the bottom"
+      },
+      "validChildren": [
+        "Input",
+        "Select",
+        "Checkbox",
+        "Button",
+        "FormField"
+      ],
+      "compositionNotes": "Use FormField as the wrapper for each field — it pairs the label, input, helper text, and error message. The actions slot should have the primary submit button on the right."
+    },
+    "relationships": {
+      "parent": null,
+      "siblings": [
+        "Modal",
+        "Card"
+      ],
+      "related": [
+        "Input",
+        "Select",
+        "Checkbox",
+        "Button",
+        "FormField"
+      ],
+      "children": [
+        "Input",
+        "Select",
+        "Checkbox",
+        "FormField",
+        "Button"
+      ],
+      "composedIn": [
+        "LoginForm",
+        "ProfileForm",
+        "Modal",
+        "Wizard"
+      ]
+    },
+    "variantGuidance": {
+      "default": "Standard vertical stacked form; all fields in a single column.",
+      "inline": "Horizontal form where label and field appear on the same line; use for compact filter bars.",
+      "wizard": "Multi-step form; use for complex flows split across multiple screens."
+    }
+  }
+}
