@@ -43,3 +43,6 @@ CREATE TABLE IF NOT EXISTS metrics (
 
 CREATE INDEX IF NOT EXISTS idx_metrics_user_id ON metrics(user_id);
 CREATE INDEX IF NOT EXISTS idx_metrics_event_type ON metrics(event_type);
+-- Index to speed up the "most recent reset boundary" query in initMetricsFromDb()
+CREATE INDEX IF NOT EXISTS idx_metrics_reset ON metrics(created_at DESC)
+  WHERE event_type = 'reset';

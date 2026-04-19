@@ -77,7 +77,7 @@ export async function setScopedData(
   await sql`
     INSERT INTO design_system_data (design_system_id, user_id, data_type, data)
     VALUES (${designSystemId}, ${userId}, ${type}, ${JSON.stringify(data)})
-    ON CONFLICT (design_system_id, data_type)
+    ON CONFLICT (design_system_id, user_id, data_type)
     DO UPDATE SET data = EXCLUDED.data, updated_at = NOW()
   `;
 }
@@ -94,7 +94,7 @@ export async function resetScopedData(
     await sql`
       INSERT INTO design_system_data (design_system_id, user_id, data_type, data)
       VALUES (${designSystemId}, ${userId}, ${t}, ${JSON.stringify(seed)})
-      ON CONFLICT (design_system_id, data_type)
+      ON CONFLICT (design_system_id, user_id, data_type)
       DO UPDATE SET data = EXCLUDED.data, updated_at = NOW()
     `;
   }

@@ -16,6 +16,7 @@ import chatRouter           from "./routes/chat.js";
 import evalRouter           from "./routes/eval.js";
 import designSystemsRouter  from "./routes/designSystems.js";
 import { authMiddleware }   from "./middleware/auth.js";
+import { initMetricsFromDb } from "./metrics.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = dirname(__filename);
@@ -52,6 +53,11 @@ app.use("/api", evalRouter);
 app.use("/api", designSystemsRouter);
 
 const isVercel = process.env.VERCEL === "1";
+
+// Restore persisted metric counters from the DB so they survive process
+// restarts.  Runs asynchronously and fails silently when DATABASE_URL is
+// not configured (e.g. local dev without a DB).
+void initMetricsFromDb();
 
 if (!isVercel) {
   const PORT = process.env.PORT ?? "3000";

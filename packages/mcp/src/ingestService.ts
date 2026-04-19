@@ -19,7 +19,7 @@
  * and any fallback hits so behaviour is observable before deeper refactors.
  */
 
-import { setData, type DataType } from "./dataStore.js";
+import { setData, setScopedData, type DataType } from "./dataStore.js";
 
 export interface IngestWarning {
   code: string;
@@ -351,11 +351,16 @@ const REQUIRED_SECTIONS: DataType[] = ["tokens", "components", "themes", "icons"
  * Ingest a single section or a combined "design-system" payload.
  * Returns a structured result with warnings, errors, loaded sections,
  * normalization summary, and readiness evaluation.
+ *
+ * When `scope` is provided (userId + designSystemId), data is persisted to
+ * Neon PostgreSQL via setScopedData.  Without a scope the legacy in-memory
+ * store is used, preserving backward compatibility.
  */
 export async function ingest(
   source: string,
   type: "design-system" | DataType,
   data: Record<string, unknown>,
+  scope?: { userId: string; designSystemId: string },
 ): Promise<IngestResult> {
   const allWarnings: IngestWarning[] = [];
   const allErrors: IngestWarning[] = [];
@@ -438,8 +443,13 @@ export async function ingest(
     allWarnings.push(...enrichWarnings);
     totalSummary.filledDefaults += filled;
 
-    // Persist
-    setData(section, enriched);
+    // Persist — use scoped DB store when scope (userId + designSystemId) is
+    // provided, otherwise fall back to in-memory store for backward compatibility.
+    if (scope) {
+      await setScopedData(scope.userId, scope.designSystemId, section, enriched);
+    } else {
+      setData(section, enriched);
+    }
     loaded.push(section);
     persistedSections[section] = enriched;
     log("info", "ingest.section.persisted", { source, section });

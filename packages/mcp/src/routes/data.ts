@@ -15,7 +15,7 @@
  */
 
 import express from "express";
-import { getData, resetData, type DataType } from "../dataStore.js";
+import { getData, getScopedData, resetData, resetScopedData, type DataType } from "../dataStore.js";
 import { ingest } from "../ingestService.js";
 import { DATA_SCHEMAS } from "../schemas.js";
 
@@ -201,11 +201,20 @@ function validateAgainstSchema(
 // Used by the Design System Manager download button.
 // Must be defined before /data/:type so Express matches it first.
 // ─────────────────────────────────────────────────────────────────────────
-router.get("/data/design-system", (_req, res) => {
+router.get("/data/design-system", async (req, res) => {
+  const { userId, designSystemId } = req;
   const result: Partial<Record<DataType, unknown>> = {};
-  for (const type of VALID_TYPES) {
-    result[type] = getData(type);
+
+  if (userId && designSystemId) {
+    for (const type of VALID_TYPES) {
+      result[type] = await getScopedData(userId, designSystemId, type);
+    }
+  } else {
+    for (const type of VALID_TYPES) {
+      result[type] = getData(type);
+    }
   }
+
   res.json(result);
 });
 
@@ -213,7 +222,7 @@ router.get("/data/design-system", (_req, res) => {
 // Returns the currently active data for the given type as JSON.
 // Used by the Component Explorer UI to read live design system data.
 // ─────────────────────────────────────────────────────────────────────────
-router.get("/data/:type", (req, res) => {
+router.get("/data/:type", async (req, res) => {
   const { type } = req.params;
 
   if (!VALID_TYPES.includes(type as DataType)) {
@@ -223,7 +232,13 @@ router.get("/data/:type", (req, res) => {
     return;
   }
 
-  res.json(getData(type as DataType));
+  const { userId, designSystemId } = req;
+  if (userId && designSystemId) {
+    const data = await getScopedData(userId, designSystemId, type as DataType);
+    res.json(data);
+  } else {
+    res.json(getData(type as DataType));
+  }
 });
 
 // ── POST /api/data ────────────────────────────────────────────────────────
@@ -247,7 +262,9 @@ router.post("/data", async (req, res) => {
     return;
   }
 
-  const result = await ingest("api/data", type as "design-system" | DataType, data as Record<string, unknown>);
+  const { userId, designSystemId } = req;
+  const scope = userId && designSystemId ? { userId, designSystemId } : undefined;
+  const result = await ingest("api/data", type as "design-system" | DataType, data as Record<string, unknown>, scope);
 
   if (!result.ok) {
     res.status(400).json({
@@ -276,7 +293,7 @@ router.post("/data", async (req, res) => {
 // Body (optional): { "type": "tokens"|"components"|"themes"|"icons" }
 // Resets one or all data types back to the bundled on-disk defaults.
 // ─────────────────────────────────────────────────────────────────────────
-router.post("/data/reset", (req, res) => {
+router.post("/data/reset", async (req, res) => {
   const { type } = (req.body ?? {}) as { type?: string };
 
   if (type !== undefined && !VALID_TYPES.includes(type as DataType)) {
@@ -286,7 +303,13 @@ router.post("/data/reset", (req, res) => {
     return;
   }
 
-  resetData(type as DataType | undefined);
+  const { userId, designSystemId } = req;
+  if (userId && designSystemId) {
+    await resetScopedData(userId, designSystemId, type as DataType | undefined);
+  } else {
+    resetData(type as DataType | undefined);
+  }
+
   const resetTarget = type ?? "all data";
   res.json({ ok: true, type: type ?? "all", message: `${resetTarget} reset to bundled defaults.` });
 });
