@@ -5,13 +5,16 @@ const MCP_URL = process.env.MCP_SERVER_URL ?? "http://localhost:3000";
 
 async function proxyToMcp(request: NextRequest, method: string) {
   const supabase = await createClient();
+  // getUser() validates the JWT with the Supabase Auth server (required for server-side auth).
+  // getSession() reads the raw cookie token which we forward to the MCP server.
+  const { data: { user } } = await supabase.auth.getUser();
   const { data: { session } } = await supabase.auth.getSession();
 
   const url = new URL(request.url);
   const upstreamUrl = new URL(`${MCP_URL}/api/data${url.pathname.replace("/api/data", "")}${url.search}`);
 
   const headers: Record<string, string> = { "Content-Type": "application/json" };
-  if (session?.access_token) headers["Authorization"] = `Bearer ${session.access_token}`;
+  if (user && session?.access_token) headers["Authorization"] = `Bearer ${session.access_token}`;
 
   const res = await fetch(upstreamUrl.toString(), {
     method,
