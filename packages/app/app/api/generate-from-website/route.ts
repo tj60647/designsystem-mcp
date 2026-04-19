@@ -5,10 +5,13 @@ const MCP_URL = process.env.MCP_SERVER_URL ?? "http://localhost:3000";
 
 export async function POST(request: NextRequest) {
   const supabase = await createClient();
+  // getUser() validates the JWT with the Supabase Auth server (required for server-side auth).
+  // getSession() reads the raw cookie token which we forward to the MCP server.
+  const { data: { user } } = await supabase.auth.getUser();
   const { data: { session } } = await supabase.auth.getSession();
 
   const headers: Record<string, string> = { "Content-Type": "application/json" };
-  if (session?.access_token) headers["Authorization"] = `Bearer ${session.access_token}`;
+  if (user && session?.access_token) headers["Authorization"] = `Bearer ${session.access_token}`;
 
   const body = await request.text();
   const res = await fetch(`${MCP_URL}/api/generate-from-website`, {

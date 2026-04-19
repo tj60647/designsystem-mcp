@@ -14,6 +14,9 @@ async function getDesignSystems(accessToken: string) {
 
 export default async function DesignSystemsPage() {
   const supabase = await createClient();
+  // getUser() validates the JWT with the Supabase Auth server (required for server-side auth).
+  // getSession() reads the raw cookie token which we forward to the MCP server.
+  await supabase.auth.getUser();
   const { data: { session } } = await supabase.auth.getSession();
   const designSystems = session?.access_token
     ? await getDesignSystems(session.access_token)
